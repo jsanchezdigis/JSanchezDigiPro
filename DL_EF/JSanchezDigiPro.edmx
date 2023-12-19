@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JSANCHEZDIGIPROModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ALUMNO">
+          <Key>
+            <PropertyRef Name="IDALUMNO" />
+          </Key>
+          <Property Name="IDALUMNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="APELLIDOPATERNO" Type="varchar" MaxLength="50" />
+          <Property Name="APELLIDOMATERNO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ALUMNOMATERIA">
+          <Key>
+            <PropertyRef Name="IDALUMNOMATERIA" />
+          </Key>
+          <Property Name="IDALUMNOMATERIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDALUMNO" Type="int" />
+          <Property Name="IDMATERIA" Type="int" />
+        </EntityType>
+        <EntityType Name="MATERIA">
+          <Key>
+            <PropertyRef Name="IDMATERIA" />
+          </Key>
+          <Property Name="IDMATERIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="COSTO" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_ALUMNOMATERIA_ALUMNO">
+          <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="0..1" />
+          <End Role="ALUMNOMATERIA" Type="Self.ALUMNOMATERIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="IDALUMNO" />
+            </Principal>
+            <Dependent Role="ALUMNOMATERIA">
+              <PropertyRef Name="IDALUMNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALUMNOMATERIA_MATERIA">
+          <End Role="MATERIA" Type="Self.MATERIA" Multiplicity="0..1" />
+          <End Role="ALUMNOMATERIA" Type="Self.ALUMNOMATERIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIA">
+              <PropertyRef Name="IDMATERIA" />
+            </Principal>
+            <Dependent Role="ALUMNOMATERIA">
+              <PropertyRef Name="IDMATERIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AlumnoAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="APELLIDOPATERNO" Type="varchar" Mode="In" />
+          <Parameter Name="APELLIDOMATERNO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AlumnoDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDALUMNO" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AlumnoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDALUMNO" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoMateriaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDALUMNO" Type="int" Mode="In" />
+          <Parameter Name="IDMATERIA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoMateriaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDALUMNOMATERIA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoMateriaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AlumnoMateriaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDALUMNOMATERIA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoMateriaUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDALUMNOMATERIA" Type="int" Mode="In" />
+          <Parameter Name="IDALUMNO" Type="int" Mode="In" />
+          <Parameter Name="IDMATERIA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDALUMNO" Type="int" Mode="In" />
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="APELLIDOPATERNO" Type="varchar" Mode="In" />
+          <Parameter Name="APELLIDOMATERNO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="MateriaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="COSTO" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="MateriaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDMATERIA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MateriaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="MateriaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDMATERIA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MateriaUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDMATERIA" Type="int" Mode="In" />
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="COSTO" Type="decimal" Mode="In" />
+        </Function>
+        <EntityContainer Name="JSANCHEZDIGIPROModelStoreContainer">
+          <EntitySet Name="ALUMNO" EntityType="Self.ALUMNO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALUMNOMATERIA" EntityType="Self.ALUMNOMATERIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIA" EntityType="Self.MATERIA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ALUMNOMATERIA_ALUMNO" Association="Self.FK_ALUMNOMATERIA_ALUMNO">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="ALUMNOMATERIA" EntitySet="ALUMNOMATERIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALUMNOMATERIA_MATERIA" Association="Self.FK_ALUMNOMATERIA_MATERIA">
+            <End Role="MATERIA" EntitySet="MATERIA" />
+            <End Role="ALUMNOMATERIA" EntitySet="ALUMNOMATERIA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JSANCHEZDIGIPROModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ALUMNO">
+          <Key>
+            <PropertyRef Name="IDALUMNO" />
+          </Key>
+          <Property Name="IDALUMNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOPATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOMATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ALUMNOMATERIA" Relationship="Self.FK_ALUMNOMATERIA_ALUMNO" FromRole="ALUMNO" ToRole="ALUMNOMATERIA" />
+        </EntityType>
+        <EntityType Name="ALUMNOMATERIA">
+          <Key>
+            <PropertyRef Name="IDALUMNOMATERIA" />
+          </Key>
+          <Property Name="IDALUMNOMATERIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDALUMNO" Type="Int32" />
+          <Property Name="IDMATERIA" Type="Int32" />
+          <NavigationProperty Name="ALUMNO" Relationship="Self.FK_ALUMNOMATERIA_ALUMNO" FromRole="ALUMNOMATERIA" ToRole="ALUMNO" />
+          <NavigationProperty Name="MATERIA" Relationship="Self.FK_ALUMNOMATERIA_MATERIA" FromRole="ALUMNOMATERIA" ToRole="MATERIA" />
+        </EntityType>
+        <EntityType Name="MATERIA">
+          <Key>
+            <PropertyRef Name="IDMATERIA" />
+          </Key>
+          <Property Name="IDMATERIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="COSTO" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ALUMNOMATERIA" Relationship="Self.FK_ALUMNOMATERIA_MATERIA" FromRole="MATERIA" ToRole="ALUMNOMATERIA" />
+        </EntityType>
+        <Association Name="FK_ALUMNOMATERIA_ALUMNO">
+          <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="0..1" />
+          <End Role="ALUMNOMATERIA" Type="Self.ALUMNOMATERIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALUMNO">
+              <PropertyRef Name="IDALUMNO" />
+            </Principal>
+            <Dependent Role="ALUMNOMATERIA">
+              <PropertyRef Name="IDALUMNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ALUMNOMATERIA_MATERIA">
+          <End Role="MATERIA" Type="Self.MATERIA" Multiplicity="0..1" />
+          <End Role="ALUMNOMATERIA" Type="Self.ALUMNOMATERIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIA">
+              <PropertyRef Name="IDMATERIA" />
+            </Principal>
+            <Dependent Role="ALUMNOMATERIA">
+              <PropertyRef Name="IDMATERIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JSANCHEZDIGIPROEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ALUMNO" EntityType="Self.ALUMNO" />
+          <EntitySet Name="ALUMNOMATERIA" EntityType="Self.ALUMNOMATERIA" />
+          <EntitySet Name="MATERIA" EntityType="Self.MATERIA" />
+          <AssociationSet Name="FK_ALUMNOMATERIA_ALUMNO" Association="Self.FK_ALUMNOMATERIA_ALUMNO">
+            <End Role="ALUMNO" EntitySet="ALUMNO" />
+            <End Role="ALUMNOMATERIA" EntitySet="ALUMNOMATERIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ALUMNOMATERIA_MATERIA" Association="Self.FK_ALUMNOMATERIA_MATERIA">
+            <End Role="MATERIA" EntitySet="MATERIA" />
+            <End Role="ALUMNOMATERIA" EntitySet="ALUMNOMATERIA" />
+          </AssociationSet>
+          <FunctionImport Name="AlumnoAdd">
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="APELLIDOPATERNO" Mode="In" Type="String" />
+            <Parameter Name="APELLIDOMATERNO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoDelete">
+            <Parameter Name="IDALUMNO" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoGetAll" ReturnType="Collection(JSANCHEZDIGIPROModel.AlumnoGetAll_Result)" />
+          <FunctionImport Name="AlumnoGetById" ReturnType="Collection(JSANCHEZDIGIPROModel.AlumnoGetById_Result)">
+            <Parameter Name="IDALUMNO" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoMateriaAdd">
+            <Parameter Name="IDALUMNO" Mode="In" Type="Int32" />
+            <Parameter Name="IDMATERIA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoMateriaDelete">
+            <Parameter Name="IDALUMNOMATERIA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoMateriaGetAll" ReturnType="Collection(JSANCHEZDIGIPROModel.AlumnoMateriaGetAll_Result)" />
+          <FunctionImport Name="AlumnoMateriaGetById" ReturnType="Collection(JSANCHEZDIGIPROModel.AlumnoMateriaGetById_Result)">
+            <Parameter Name="IDALUMNOMATERIA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoMateriaUpdate">
+            <Parameter Name="IDALUMNOMATERIA" Mode="In" Type="Int32" />
+            <Parameter Name="IDALUMNO" Mode="In" Type="Int32" />
+            <Parameter Name="IDMATERIA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoUpdate">
+            <Parameter Name="IDALUMNO" Mode="In" Type="Int32" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="APELLIDOPATERNO" Mode="In" Type="String" />
+            <Parameter Name="APELLIDOMATERNO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="MateriaAdd">
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="COSTO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="MateriaDelete">
+            <Parameter Name="IDMATERIA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MateriaGetAll" ReturnType="Collection(JSANCHEZDIGIPROModel.MateriaGetAll_Result)" />
+          <FunctionImport Name="MateriaGetById" ReturnType="Collection(JSANCHEZDIGIPROModel.MateriaGetById_Result)">
+            <Parameter Name="IDMATERIA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MateriaUpdate">
+            <Parameter Name="IDMATERIA" Mode="In" Type="Int32" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="COSTO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="AlumnoGetAll_Result">
+          <Property Type="Int32" Name="IDALUMNO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APELLIDOPATERNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APELLIDOMATERNO" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="AlumnoGetById_Result">
+          <Property Type="Int32" Name="IDALUMNO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APELLIDOPATERNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APELLIDOMATERNO" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="AlumnoMateriaGetAll_Result">
+          <Property Type="Int32" Name="IDALUMNOMATERIA" Nullable="false" />
+          <Property Type="String" Name="NOMBRE_ALUMNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APELLIDOPATERNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APELLIDOMATERNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NOMBRE_MATERIA" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="COSTO" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="AlumnoMateriaGetById_Result">
+          <Property Type="Int32" Name="IDALUMNOMATERIA" Nullable="false" />
+          <Property Type="String" Name="NOMBRE_ALUMNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APELLIDOPATERNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APELLIDOMATERNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NOMBRE_MATERIA" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="COSTO" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="MateriaGetAll_Result">
+          <Property Type="Int32" Name="IDMATERIA" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="COSTO" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="MateriaGetById_Result">
+          <Property Type="Int32" Name="IDMATERIA" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="COSTO" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JSANCHEZDIGIPROModelStoreContainer" CdmEntityContainer="JSANCHEZDIGIPROEntities">
+          <EntitySetMapping Name="ALUMNO">
+            <EntityTypeMapping TypeName="JSANCHEZDIGIPROModel.ALUMNO">
+              <MappingFragment StoreEntitySet="ALUMNO">
+                <ScalarProperty Name="IDALUMNO" ColumnName="IDALUMNO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+                <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALUMNOMATERIA">
+            <EntityTypeMapping TypeName="JSANCHEZDIGIPROModel.ALUMNOMATERIA">
+              <MappingFragment StoreEntitySet="ALUMNOMATERIA">
+                <ScalarProperty Name="IDALUMNOMATERIA" ColumnName="IDALUMNOMATERIA" />
+                <ScalarProperty Name="IDALUMNO" ColumnName="IDALUMNO" />
+                <ScalarProperty Name="IDMATERIA" ColumnName="IDMATERIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MATERIA">
+            <EntityTypeMapping TypeName="JSANCHEZDIGIPROModel.MATERIA">
+              <MappingFragment StoreEntitySet="MATERIA">
+                <ScalarProperty Name="IDMATERIA" ColumnName="IDMATERIA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoAdd" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoAdd" />
+          <FunctionImportMapping FunctionImportName="AlumnoDelete" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoDelete" />
+          <FunctionImportMapping FunctionImportName="AlumnoGetAll" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JSANCHEZDIGIPROModel.AlumnoGetAll_Result">
+                <ScalarProperty Name="IDALUMNO" ColumnName="IDALUMNO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+                <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoGetById" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JSANCHEZDIGIPROModel.AlumnoGetById_Result">
+                <ScalarProperty Name="IDALUMNO" ColumnName="IDALUMNO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+                <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaAdd" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoMateriaAdd" />
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaDelete" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoMateriaDelete" />
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaGetAll" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoMateriaGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JSANCHEZDIGIPROModel.AlumnoMateriaGetAll_Result">
+                <ScalarProperty Name="IDALUMNOMATERIA" ColumnName="IDALUMNOMATERIA" />
+                <ScalarProperty Name="NOMBRE_ALUMNO" ColumnName="NOMBRE_ALUMNO" />
+                <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+                <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+                <ScalarProperty Name="NOMBRE_MATERIA" ColumnName="NOMBRE_MATERIA" />
+                <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaGetById" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoMateriaGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JSANCHEZDIGIPROModel.AlumnoMateriaGetById_Result">
+                <ScalarProperty Name="IDALUMNOMATERIA" ColumnName="IDALUMNOMATERIA" />
+                <ScalarProperty Name="NOMBRE_ALUMNO" ColumnName="NOMBRE_ALUMNO" />
+                <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+                <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+                <ScalarProperty Name="NOMBRE_MATERIA" ColumnName="NOMBRE_MATERIA" />
+                <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaUpdate" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoMateriaUpdate" />
+          <FunctionImportMapping FunctionImportName="AlumnoUpdate" FunctionName="JSANCHEZDIGIPROModel.Store.AlumnoUpdate" />
+          <FunctionImportMapping FunctionImportName="MateriaAdd" FunctionName="JSANCHEZDIGIPROModel.Store.MateriaAdd" />
+          <FunctionImportMapping FunctionImportName="MateriaDelete" FunctionName="JSANCHEZDIGIPROModel.Store.MateriaDelete" />
+          <FunctionImportMapping FunctionImportName="MateriaGetAll" FunctionName="JSANCHEZDIGIPROModel.Store.MateriaGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JSANCHEZDIGIPROModel.MateriaGetAll_Result">
+                <ScalarProperty Name="IDMATERIA" ColumnName="IDMATERIA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MateriaGetById" FunctionName="JSANCHEZDIGIPROModel.Store.MateriaGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JSANCHEZDIGIPROModel.MateriaGetById_Result">
+                <ScalarProperty Name="IDMATERIA" ColumnName="IDMATERIA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="COSTO" ColumnName="COSTO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MateriaUpdate" FunctionName="JSANCHEZDIGIPROModel.Store.MateriaUpdate" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
